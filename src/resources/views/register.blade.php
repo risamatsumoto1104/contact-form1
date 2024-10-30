@@ -10,33 +10,33 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <h1>FashionablyLate</h1>
-            <form action="">
-                <div>
-                    <button>login</button>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">FashionablyLate</h1>
+            <form class="header-form" action="">
+                <div class="header-button-container">
+                    <button class="header-button">login</button>
                 </div>
             </form>
         </div>
     </header>
 
-    <main>
-        <h2>Register</h2>
-        <form action="">
-            <div>
-                <p>お名前</p>
-                <input type="text">
+    <main class="main-content">
+        <h2 class="main-content-title">Register</h2>
+        <form class="main-content-form" action="">
+            <div class="form-group">
+                <p class="form-label">お名前</p>
+                <input class="form-input" type="text" name="name">
             </div>
-            <div>
-                <p>メールアドレス</p>
-                <input type="text">
+            <div class="form-group">
+                <p class="form-label">メールアドレス</p>
+                <input class="form-input" type="text" name="email">
             </div>
-            <div>
-                <p>パスワード</p>
-                <input type="text">
+            <div class="form-group">
+                <p class="form-label">パスワード</p>
+                <input class="form-input" type="text" name="password">
             </div>
-            <input type="submit" value="登録">
+            <input class="form-submit-button" type="submit" value="登録">
         </form>
     </main>
 </body>
