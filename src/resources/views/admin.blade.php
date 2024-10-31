@@ -13,11 +13,10 @@
     <header>
         <div>
             <h1>FashionablyLate</h1>
-            <form action="">
-                <div>
-                    <button>logout</button>
-                </div>
-            </form>
+            {{-- ログインページへ遷移 --}}
+            <div>
+                <a href="">logout</a>
+            </div>
         </div>
     </header>
 

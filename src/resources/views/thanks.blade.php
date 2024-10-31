@@ -6,21 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thanks</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <style>
-        /* cssの記述 */
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/thanks.css') }}">
 </head>
 
 <body>
-    <main>
-        <p>Thank you</p>
-        <p>お問い合わせありがとうございました</p>
-        <form action="">
-                <div>
-                    <button>HOME</button>
-                </div>
-            </form>
-    </main>
+    <div class="thanks-container">
+        <h2 class="thanks-message">Thank you</h2>
+        <p class="thanks-subtext">お問い合わせありがとうございました</p>
+        {{-- お問い合わせフォーム入力ページへ遷移 --}}
+        <div class="thanks-link-container">
+            <a href="" class="thanks-home-link">HOME</a>
+        </div>
+    </div>
 </body>
 
 </html>

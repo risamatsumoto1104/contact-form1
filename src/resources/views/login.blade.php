@@ -6,33 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login_register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 
 <body>
-    <header>
-        <div>
-            <h1>FashionablyLate</h1>
-            <form action="">
-                <div>
-                    <button>register</button>
-                </div>
-            </form>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">FashionablyLate</h1>
+            {{-- 登録ページへ遷移 --}}
+            <div class="header-link-container">
+                <a href="" class="header-link">register</a>
+            </div>
         </div>
     </header>
 
-    <main>
-        <h2>Login</h2>
-        <form action="">
-            <div>
-                <p>メールアドレス</p>
-                <input type="text">
+    <main class="main-content">
+        <h2 class="main-content-title">Login</h2>
+        <form class="main-content-form" action="">
+            <div class="main-content-inner">
+                <div class="form-group">
+                    <p class="form-label">メールアドレス</p>
+                    <input class="form-input" type="text"  placeholder="　例:test@example.com">
+                </div>
+                <div class="form-group">
+                    <p class="form-label">パスワード</p>
+                    <input class="form-input" type="text"  placeholder="　例:coachtech1106">
+                </div>
             </div>
-            <div>
-                <p>パスワード</p>
-                <input type="text">
-            </div>
-            <input type="submit" value="ログイン">
+            {{-- バリデーションエラーがなければ管理画面へ遷移 --}}
+            <input class="form-submit-button" type="submit" value="ログイン">
         </form>
     </main>
 </body>

@@ -57,10 +57,11 @@
             <div>
                 <input type="submit" value="送信">
             </div>
-            <div>
-                <button>修正</button>
-            </div>
         </form>
+        {{-- お問い合わせフォームに遷移 --}}
+        <div>
+            <a href="">修正</a>
+        </div>
     </main>
 </body>
 
