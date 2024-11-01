@@ -14,7 +14,7 @@
         <h1 class="header-title">FashionablyLate</h1>
         {{-- 登録ページへ遷移 --}}
         <div class="header-link-container">
-            <a class="header-link" href="">register</a>
+            <a class="header-link" href="{{ url('/register') }}">register</a>
         </div>
     </header>
 

@@ -56,7 +56,7 @@
                 <input class="form-submit-button" type="submit" value="送信">
             </form>
             {{-- お問い合わせフォームに遷移 --}}
-            <a class="content-link-contact" href="">修正</a>
+            <a class="content-link-contact" href="{{ url('/') }}">修正</a>
         </div>
         
     </main>

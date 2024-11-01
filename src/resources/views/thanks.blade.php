@@ -13,7 +13,7 @@
     <h2 class="thanks-message">Thank you</h2>
     <p class="thanks-subtext">お問い合わせありがとうございました</p>
     {{-- お問い合わせフォーム入力ページへ遷移 --}}
-    <a class="thanks-home-link" href="">HOME</a>
+    <a class="thanks-home-link" href="{{ url('/') }}">HOME</a>
 </body>
 
 </html>

@@ -77,7 +77,7 @@
         </form>
         {{-- 確認画面ページへ遷移 --}}
         <div class="content-link-container">
-            <a class="content-link-confirm" href="">確認画面</a>
+            <a class="content-link-confirm" href="{{ url('/confirm') }}">確認画面</a>
         </div>
     </main>
 </body>

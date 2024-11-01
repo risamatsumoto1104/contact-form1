@@ -14,7 +14,7 @@
         <h1 class="header-title">FashionablyLate</h1>
         {{-- ログインページへ遷移 --}}
         <div class="header-link-container">
-            <a class="header-link" href="">logout</a>
+            <a class="header-link" href="{{ url('/login') }}">logout</a>
         </div>
     </header>
 
