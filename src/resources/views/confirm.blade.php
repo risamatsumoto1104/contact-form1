@@ -53,14 +53,10 @@
         </table>
         <div class="button-container">
             <form class="content-form-submit" action="">
-                <div>
-                    <input class="form-submit-button" type="submit" value="送信">
-                </div>
+                <input class="form-submit-button" type="submit" value="送信">
             </form>
             {{-- お問い合わせフォームに遷移 --}}
-            <div class="content-link-container">
-                <a class="content-link-contact" href="">修正</a>
-            </div>
+            <a class="content-link-contact" href="">修正</a>
         </div>
         
     </main>

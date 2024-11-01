@@ -41,46 +41,73 @@ body {
 }
 
 /* テーブル　枠組み */
-.content-table{
-
+.content-table {
+    width: 972px;
+    height: 606px;
+    margin: 0 auto;
+    border: solid 1px #E0DFDE;
 }
 
 /* テーブル　行 */
-.table-row{
+.table-row:not(:last-child) {
+    border-bottom: solid 1px #E0DFDE;
+    height: 69.92px;
+}
 
+.table-row:last-child {
+    height: 116.54px;
 }
 
 /* テーブル ラベル*/
-.table-label{
-
+.table-label {
+    width: 305px;
+    background-color: #BAA899;
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: left;
+    padding-left: 50px;
 }
 
 /* テーブル　内容 */
-.table-data{
-
+.table-data {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8B7969;
+    text-align: left;
+    padding-left: 50px;
 }
 
 /* 「送信」「修正」　枠組み */
-.button-container{
-
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
 
 /* 送信ボタン　枠組み */
-.content-form-submit{
-
+.content-form-submit {
+    margin-right: 50px;
 }
 
 /* 送信ボタン */
-.form-submit-button{
-
-}
-
-/* 修正ボタン 枠組み*/
-.content-link-container{
-
+.form-submit-button {
+    width: 120px;
+    height: 42px;
+    border: none;
+    background-color: #82756A;
+    font-family: Inika;
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
 }
 
 /* 修正ボタン */
-.content-link-contact{
-
+.content-link-contact {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8B7969;
+    cursor: pointer;
 }

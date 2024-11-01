@@ -20,53 +20,61 @@
 
     <main class="main-content">
         <h2 class="main-content-title">admin</h2>
-        <form action="">
-            <div>
-                <input type="text" neme="user" placeholder="名前やメールアドレスを入力してください">
-                <select>
-                    <option value="">性別</option>
-                </select>
-                <select>
-                    <option value="">お問い合わせの種類</option>
-                </select>
-                <input type="date" name="calender">
-                <div>
-                    <button>検索</button>
+        <form class="content-form" action="">
+            <div class="content-form-container-search">
+                <div class="form-container-search-group">
+                    <input class="form-input-text" type="text" neme="user" placeholder="名前やメールアドレスを入力してください">
                 </div>
-                <div>
-                    <button>リセット</button>
+                <div class="form-container-search-group-select">
+                    <select class="form-select-gender">
+                        <option value="">性別</option>
+                    </select>
+                </div>
+                <div class="form-container-search-group-select">
+                    <select class="form-select-kind">
+                        <option value="">お問い合わせの種類</option>
+                    </select>
+                </div>
+                <div class="form-container-search-group">
+                    <input class="form-input-calender" type="date" name="calender">
+                </div>
+                <div class="form-container-search-group">
+                    <button class="form-button-search">検索</button>
+                </div>
+                <div class="form-container-search-group">
+                    <button class="form-button-reset">リセット</button>
                 </div>
             </div>
-            <div>
-                <div>
-                    <button>エクスポート</button>
+            <div class="content-form-container">
+                <div class="form-container">
+                    <button class="form-button-export">エクスポート</button>
                 </div>
-                {{-- ページネーション --}}
+                <div class="form-container">
+                    <span class="pagination">{{-- ページネーション --}}</span>
+                </div>
             </div>
         </form>
-        <div>
-            <table>
-                <tr>
-                    <th>お名前</th>
-                    <th>性別</th>
-                    <th>メールアドレス</th>
-                    <th>お問い合わせの種類</th>
-                </tr>
-                <tr>
-                    <td>山本太郎</td>
-                    <td>男性</td>
-                    <td>test@example.com</td>
-                    <td>商品の交換について</td>
-                    <td>
-                        <form>
-                            <div>
-                                <button>詳細</button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <table class="content-table">
+            <tr class="table-row-title">
+                <th class="table-label">お名前</th>
+                <th class="table-label">性別</th>
+                <th class="table-label">メールアドレス</th>
+                <th class="table-label">お問い合わせの種類</th>
+                <th class="table-label"></th>
+            </tr>
+            <tr class="table-row-data">
+                <td class="table-data">山本  太郎</td>
+                <td class="table-data">男性</td>
+                <td class="table-data">test@example.com</td>
+                <td class="table-data">商品の交換について</td>
+                <td class="table-detail-button">
+                    <form class="table-form">
+                        <button class="table-form-button">詳細</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
     </main>
 </body>
 

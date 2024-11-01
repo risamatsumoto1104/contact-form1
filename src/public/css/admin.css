@@ -1,16 +1,15 @@
 body {
     font-family: Inika;
-    background-color: #F2ECE7;
     max-width: 1512px;
     max-height: 982px;
 }
 
 /* ヘッダー全体 */
 .header {
-    background-color: #ffffff;
     text-align: center;
     width: 100%;
     height: 99px;
+    border-bottom: solid 1px #E0DFDE;
 }
 
 /* ヘッダータイトル */
@@ -38,6 +37,7 @@ body {
     width: 100px;
     height: 34px;
     text-decoration: none;
+    background-color: #F0F0F099;
     font-family: Inika;
     font-weight: 400;
     font-size: 20px;
@@ -60,4 +60,199 @@ body {
     color: #8B7969;
     margin: 3% auto;
 
+}
+
+/* フォーム全体 */
+.content-form {
+    width: 1184.06px;
+    margin: 0 auto;
+}
+
+/* フォーム1行目・2行目 */
+.content-form-container-search,
+.content-form-container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* 共通設定(入力欄・性別セレクト・種類セレクト・カレンダー) */
+.form-input-text,
+.form-select-gender,
+.form-select-kind,
+.form-input-calender {
+    border: solid 1px #E3DED9;
+    height: 50px;
+}
+
+/* 共通設定（性別セレクト・種類セレクト・カレンダー） */
+.form-select-gender,
+.form-select-kind,
+.form-input-calender {
+    font-family: Inika;
+    font-size: 17px;
+    font-weight: 400;
+    color: #8B7969;
+    background-color: #F4F4F4;
+    padding-left: 10px;
+    padding-right: 30px;
+    appearance: none;
+    position: relative;
+}
+
+/* 共通設定（検索ボタン・リセットボタン） */
+.form-button-search,
+.form-button-reset {
+    width: 102.48px;
+    height: 50px;
+    border: none;
+    font-family: Inika;
+    font-size: 18px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+
+/* フォーム1行目　入力欄 */
+.form-input-text {
+    width: 347.47px;
+    font-family: Inika;
+    font-size: 16px;
+    font-weight: 400;
+    color: #BEB1A6;
+    text-align: center;
+    background-color: #FBFBFB;
+}
+
+/* フォーム1行目　セレクトボックス「性別」 */
+.form-select-gender {
+    width: 102.48px;
+}
+
+/* フォーム1行目　セレクトボックス「お問い合わせの種類」 */
+.form-select-kind {
+    width: 223.04px;
+}
+
+/* フォーム1行目　カレンダー */
+.form-input-calender {
+    width: 148.87px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+/* 矢印アイコンを疑似要素で追加 */
+/* ※セレクトタグには疑似要素は適用できない */
+.form-container-search-group-select {
+    position: relative;
+}
+
+.form-container-search-group-select::after,
+.form-input-calender::after {
+    content: "▼";
+    width: 17.22px;
+    height: 20px;
+    font-size: 17px;
+    text-align: center;
+    color: #E0DFDE;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* 検索ボタン */
+.form-button-search {
+    background-color: #82756A;
+}
+
+/* リセットボタン */
+.form-button-reset {
+    background-color: #D9C6B5;
+}
+
+/* エクスポートボタン */
+.form-button-export {
+    width: 148px;
+    height: 39px;
+    padding: 8px 20px;
+    background-color: #E1DBD699;
+    border: none;
+    font-family: Inika;
+    font-size: 18px;
+    font-weight: 400;
+    color: #8B7969;
+    text-align: center;
+
+}
+
+/* ページネーション */
+.pagination {
+    width: 219px;
+    height: 31px;
+    border: solid 1px #E0DFDE;
+}
+
+/* テーブル全体 */
+.content-table {
+    width: 1183px;
+    max-height: 570px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* テーブル　タイトル行 */
+.table-row-title {
+    width: 100%;
+    height: 59px;
+    line-height: 50px;
+}
+
+/* テーブル　ラベル */
+.table-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    background-color: #8B7969;
+}
+
+/* 検索結果　行 */
+.table-row-data {
+    width: 100%;
+    height: 72.98px;
+    border-left: solid 1px #E0DFDE;
+    border-right: solid 1px #E0DFDE;
+    border-bottom: solid 1px #E0DFDE;
+    line-height: 50px;
+}
+
+/* テーブル　内容 */
+.table-data {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8B7969;
+}
+
+/* 詳細ボタン　枠組み */
+.table-detail-button {}
+
+/* 詳細ボタン */
+.table-form-button {
+    width: 76px;
+    height: 39px;
+    padding: 8px 18px;
+    border: solid 1px #D9C6B599;
+    background-color: #F4F4F44D;
+    font-family: Inika;
+    font-size: 18px;
+    font-weight: 400;
+    color: #D9C6B5;
+    text-align: center;
 }
