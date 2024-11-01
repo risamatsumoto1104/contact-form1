@@ -4,16 +4,15 @@ body {
     max-height: 982px;
 }
 
+/* ヘッダー全体 */
 .header {
-    border-bottom: solid 1px #E0DFDE;
-}
-
-.header-container {
     text-align: center;
     width: 100%;
     height: 99px;
+    border-bottom: solid 1px #E0DFDE;
 }
 
+/* ヘッダータイトル */
 .header-title {
     display: flex;
     align-items: center;
@@ -25,10 +24,13 @@ body {
     color: #8B7969;
 }
 
+/* メイン全体 */
 .main-content {
     width: 100%;
+    height: 100%;
 }
 
+/* メインタイトル */
 .main-content-title {
     text-align: center;
     font-size: 35px;
@@ -38,6 +40,7 @@ body {
 
 }
 
+/* コンテンツの外枠 */
 .content-form {
     text-align: center;
     margin: 0 auto;
@@ -45,12 +48,14 @@ body {
     height: 606px;
 }
 
+/* コンテンツの行 */
 .content-form-group {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+/* コンテンツのラベル */
 .content-form-label-required,
 .content-form-label {
     color: #8B7969;
@@ -58,31 +63,51 @@ body {
     font-weight: 400;
 }
 
+/* 必須のもの「※」を疑似要素で追加 */
 .content-form-label-required::after {
     content: " ※";
     color: #ff0000;
 }
 
+/* 入力・選択箇所　枠組み（共通） */
 .content-form-inner,
 .content-form-inner-name,
 .content-form-inner-radio,
+.content-form-inner-tel,
+.content-form-inner-select,
 .form-textarea {
     width: 620.36px;
     height: 38px;
 }
 
+/* 入力・選択箇所（共通） */
+.form-input-name,
+.form-input,
+.form-input-tel,
+.form-select,
+.form-textarea {
+    background-color: #F4F4F4;
+    border: none;
+    font-family: Inika;
+    font-size: 14px;
+    font-weight: 400;
+    color: #BEB1A6;
+}
+
+/* 「お名前」入力箇所　枠組み */
 .content-form-inner-name {
     display: flex;
     justify-content: space-between;
 }
 
+/* 「お名前」入力箇所 */
 .form-input-name {
     width: 287.15px;
     height: 38px;
-    background-color: #F4F4F4;
-    border: none;
+    padding-left: 20px;
 }
 
+/* 「性別」入力箇所　枠組み */
 .content-form-inner-radio {
     display: flex;
     align-items: center;
@@ -90,6 +115,7 @@ body {
     color: #8B7969;
 }
 
+/* 「性別」ボタンとラベルそれぞれ */
 .label-radio {
     height: 26px;
     margin-right: 50px;
@@ -97,9 +123,93 @@ body {
     font-weight: 400;
 }
 
+/* 「性別」ボタンのみ */
 .form-input-radio {
     width: 20px;
     height: 20px;
     margin: 0 5px;
     accent-color: #8B7969;
+}
+
+/* 「メールアドレス」「住所」「建物名」入力箇所 */
+.form-input {
+    width: 100%;
+    height: 38px;
+    padding-left: 20px;
+}
+
+/* 「電話番号」入力箇所　枠組み */
+.content-form-inner-tel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* 「電話番号」入力箇所 */
+.form-input-tel {
+    text-align: center;
+    width: 178.12px;
+    height: 38px;
+}
+
+/* 「お問い合わせの種類」選択箇所　枠組み */
+.content-form-inner-select {
+    text-align: left;
+    position: relative;
+}
+
+/* 「お問い合わせの種類」選択箇所 */
+.form-select {
+    width: 331.68px;
+    height: 38px;
+    padding-left: 20px;
+    appearance: none;
+}
+
+/* 矢印アイコンを疑似要素で追加 */
+span {
+    position: relative;
+}
+
+span::after {
+    content: "▼";
+    width: 30.71px;
+    height: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: #BEB1A6;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* 「お問い合わせ内容」入力箇所 */
+.form-textarea {
+    height: 129px;
+    resize: none;
+    margin-top: 16px;
+    padding: 20px;
+}
+
+/* 確認画面ボタン　枠組み */
+.content-link-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* 確認ボタン */
+.content-link-confirm {
+    display: inline-block;
+    width: 160px;
+    height: 46px;
+    text-decoration: none;
+    padding: 10px 40px;
+    background-color: #82756A;
+    font-family: Inika;
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
 }

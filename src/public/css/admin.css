@@ -1,0 +1,63 @@
+body {
+    font-family: Inika;
+    background-color: #F2ECE7;
+    max-width: 1512px;
+    max-height: 982px;
+}
+
+/* ヘッダー全体 */
+.header {
+    background-color: #ffffff;
+    text-align: center;
+    width: 100%;
+    height: 99px;
+}
+
+/* ヘッダータイトル */
+.header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 100%;
+    font-size: 40px;
+    font-weight: 400;
+    color: #8B7969;
+}
+
+/* ヘッダーリンク　枠組み */
+.header-link-container {
+    position: absolute;
+    top: 34px;
+    left: 87%;
+}
+
+/* リンクボタン */
+.header-link {
+    display: inline-block;
+    width: 100px;
+    height: 34px;
+    text-decoration: none;
+    font-family: Inika;
+    font-weight: 400;
+    font-size: 20px;
+    border: solid 1px #D9C6B5;
+    color: #D9C6B5;
+    cursor: pointer;
+
+}
+
+/* メイン全体 */
+.main-content {
+    width: 100%;
+}
+
+/* メインタイトル */
+.main-content-title {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 400;
+    color: #8B7969;
+    margin: 3% auto;
+
+}

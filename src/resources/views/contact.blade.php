@@ -11,9 +11,7 @@
 
 <body>
     <header class="header">
-        <div class="header-container">
-            <h1 class="header-title">FashionablyLate</h1>
-        </div>
+        <h1 class="header-title">FashionablyLate</h1>
     </header>
 
     <main class="main-content">
@@ -42,7 +40,7 @@
             </div>
             <div class="content-form-group">
                 <p class="content-form-label-required">電話番号</p>
-                <div class="content-form-inner">
+                <div class="content-form-inner-tel">
                     <input class="form-input-tel" type="tel" name="tell" placeholder="080">
                     <p class="tel-hyphen">-</p>
                     <input class="form-input-tel" type="tel" name="tell" placeholder="1234">
@@ -64,20 +62,22 @@
             </div>
             <div class="content-form-group">
                 <p class="content-form-label-required">お問い合わせの種類</p>
-                <div class="content-form-inner">
-                    <select class="form-select">
-                        <option value="">選択してください</option>
-                    </select>
+                <div class="content-form-inner-select">
+                    <span>
+                        <select class="form-select">
+                            <option value="">選択してください</option>
+                        </select>
+                    </span>
                 </div>
             </div>
             <div class="content-form-group">
                 <p class="content-form-label-required">お問い合わせ内容</p>
-                <textarea class="form-textarea" name="detail"></textarea>
+                <textarea class="form-textarea" name="detail" placeholder="お問い合わせ内容をご記載ください"></textarea>
             </div>
         </form>
         {{-- 確認画面ページへ遷移 --}}
         <div class="content-link-container">
-            <a href="content-link-confirm">確認画面</a>
+            <a class="content-link-confirm" href="">確認画面</a>
         </div>
     </main>
 </body>

@@ -10,18 +10,16 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <h1>FashionablyLate</h1>
-            {{-- ログインページへ遷移 --}}
-            <div>
-                <a href="">logout</a>
-            </div>
+    <header class="header">
+        <h1 class="header-title">FashionablyLate</h1>
+        {{-- ログインページへ遷移 --}}
+        <div class="header-link-container">
+            <a class="header-link" href="">logout</a>
         </div>
     </header>
 
-    <main>
-        <h2>admin</h2>
+    <main class="main-content">
+        <h2 class="main-content-title">admin</h2>
         <form action="">
             <div>
                 <input type="text" neme="user" placeholder="名前やメールアドレスを入力してください">

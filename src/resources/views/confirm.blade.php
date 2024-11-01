@@ -6,62 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Confirm</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/comfirm.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/confirm.css') }}">
 </head>
 
 <body>
-    <header>
-        <div>
-            <h1>FashionablyLate</h1>
-        </div>
+    <header class="header">
+        <h1 class="header-title">FashionablyLate</h1>
     </header>
 
-    <main>
-        <h2>Confirm</h2>
-        <table>
-            <tr>
-                <th>お名前</th>
-                <td>山田 太郎</td>
+    <main class="main-content">
+        <h2 class="main-content-title">Confirm</h2>
+        <table class="content-table">
+            <tr class="table-row">
+                <th class="table-label">お名前</th>
+                <td class="table-data">山田 太郎</td>
             </tr>
-            <tr>
-                <th>性別</th>
-                <td>男性</td>
+            <tr class="table-row">
+                <th class="table-label">性別</th>
+                <td class="table-data">男性</td>
             </tr>
-            <tr>
-                <th>メールアドレス</th>
-                <td>test@example.com</td>
+            <tr class="table-row">
+                <th class="table-label">メールアドレス</th>
+                <td class="table-data">test@example.com</td>
+            </tr class="table-row">
+            <tr class="table-row">
+                <th class="table-label">電話番号</th>
+                <td class="table-data">08012345678</td>
             </tr>
-            <tr>
-                <th>電話番号</th>
-                <td>08012345678</td>
+            <tr class="table-row">
+                <th class="table-label">住所</th>
+                <td class="table-data">東京都渋谷区千駄ヶ谷1-2-3</td>
             </tr>
-            <tr>
-                <th>住所</th>
-                <td>東京都渋谷区千駄ヶ谷1-2-3</td>
+            <tr class="table-row">
+                <th class="table-label">建物名</th>
+                <td class="table-data">千駄ヶ谷マンション101</td>
             </tr>
-            <tr>
-                <th>建物名</th>
-                <td>千駄ヶ谷マンション101</td>
+            <tr class="table-row">
+                <th class="table-label">お問い合わせの種類</th>
+                <td class="table-data">商品の交換について</td>
             </tr>
-            <tr>
-                <th>お問い合わせの種類</th>
-                <td>商品の交換について</td>
-            </tr>
-            <tr>
-                <th>お問い合わせ内容</th>
-                <td>届いた商品が注文した商品ではありませんでした。<br>
+            <tr class="table-row">
+                <th class="table-label">お問い合わせ内容</th>
+                <td class="table-data">届いた商品が注文した商品ではありませんでした。<br>
                 商品の取替をお願いします。</td>
             </tr>
         </table>
-        <form action="">
-            <div>
-                <input type="submit" value="送信">
+        <div class="button-container">
+            <form class="content-form-submit" action="">
+                <div>
+                    <input class="form-submit-button" type="submit" value="送信">
+                </div>
+            </form>
+            {{-- お問い合わせフォームに遷移 --}}
+            <div class="content-link-container">
+                <a class="content-link-contact" href="">修正</a>
             </div>
-        </form>
-        {{-- お問い合わせフォームに遷移 --}}
-        <div>
-            <a href="">修正</a>
         </div>
+        
     </main>
 </body>
 
