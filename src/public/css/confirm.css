@@ -105,9 +105,13 @@ body {
 }
 
 /* 修正ボタン */
-.content-link-contact {
+.content-button-contact {
     font-size: 20px;
     font-weight: 400;
+    background: none;
+    border: none;
+    border-bottom: solid 1px #8B7969;
+    padding: 0;
     color: #8B7969;
     cursor: pointer;
 }

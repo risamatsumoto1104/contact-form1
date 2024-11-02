@@ -20,14 +20,16 @@ use App\Http\Controllers\ThanksController;
 */
 
 Route::get('/', [ContactController::class, 'index']);
-Route::post('/', [ContactController::class, 'store']);
 Route::post('/confirm', [ContactController::class, 'confirm']);
 
 
-Route::get('/confirm', [ConfirmController::class, 'index']);
+Route::post('/confirm', [ConfirmController::class, 'confirm']);
+Route::post('/thanks', [ConfirmController::class, 'store']);
+Route::post('/', [ConfirmController::class, 'back']);
 
 
 Route::get('/thanks', [ThanksController::class, 'index']);
+
 
 Route::middleware('auth')->group(function(){
     Route::get('/admin', [AdminController::class, 'index']);
