@@ -20,19 +20,32 @@
 
     <main class="main-content">
         <h2 class="main-content-title">Register</h2>
-        <form class="main-content-form" action="">
+        <form class="main-content-form" action="{{ url('/register') }}" method="POST">
+        @csrf
             <div class="main-content-inner">
                 <div class="form-group">
                     <p class="form-label">お名前</p>
-                    <input class="form-input" type="text" name="name" placeholder="例:山田 太郎">
+                    <input class="form-input" type="text" name="name" placeholder="例:山田 太郎" value="{{ old('name') }}">
+                    {{-- エラーメッセージの表示 --}}
+                    @error('name')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
                     <div class="form-group">
                     <p class="form-label">メールアドレス</p>
-                    <input class="form-input" type="text" name="email" placeholder="例:test@example.com">
+                    <input class="form-input" type="text" name="email" placeholder="例:test@example.com" value="{{ old('email') }}">
+                    {{-- エラーメッセージの表示 --}}
+                    @error('email')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <p class="form-label">パスワード</p>
-                    <input class="form-input" type="text" name="password" placeholder="例:coachtech1106">
+                    <input class="form-input" type="text" name="password" placeholder="例:coachtech1106" value="{{ old('password') }}">
+                    {{-- エラーメッセージの表示 --}}
+                    @error('password')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             {{-- バリデーションエラーがなければログイン画面へ遷移 --}}

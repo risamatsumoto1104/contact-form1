@@ -15,9 +15,9 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => $this->faker->numberBetween(1, 100), 
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
+            'category_id' => $this->faker->numberBetween(1, 5), 
+            'first_name' => $this->faker->randomElement(['太郎','次郎','三郎','花子','桜子']),
+            'last_name' => $this->faker->randomElement(['山田','田中','鈴木','佐藤','山本']),
             'gender' => $this->faker->randomElement(['男性', '女性','その他']),
             'email' => $this->faker->unique()->safeEmail,
             'tell' => $this->faker->phoneNumber,

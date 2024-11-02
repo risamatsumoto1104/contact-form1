@@ -19,15 +19,23 @@ use App\Http\Controllers\ThanksController;
 |
 */
 
-// お問い合わせフォーム入力ページ
 Route::get('/', [ContactController::class, 'index']);
-// お問い合わせフォーム確認ページ 
+Route::post('/', [ContactController::class, 'store']);
+Route::post('/confirm', [ContactController::class, 'confirm']);
+
+
 Route::get('/confirm', [ConfirmController::class, 'index']);
-// サンクスページ
+
+
 Route::get('/thanks', [ThanksController::class, 'index']);
-// 管理画面
+
+
 Route::get('/admin', [AdminController::class, 'index']);
-// ユーザー登録ページ
+
+
 Route::get('/register', [RegisterController::class, 'index']);
-// ログインページ
+Route::post('/register', [RegisterController::class, 'store']);
+
+
 Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'store']);

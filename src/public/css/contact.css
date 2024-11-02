@@ -55,6 +55,12 @@ body {
     justify-content: space-between;
 }
 
+/* エラー行 */
+.error-group {
+    width: 620.36;
+    margin-left: 351.64px;
+}
+
 /* コンテンツのラベル */
 .content-form-label-required,
 .content-form-label {
@@ -167,11 +173,11 @@ body {
 }
 
 /* 矢印アイコンを疑似要素で追加 */
-span {
+.span-form-select {
     position: relative;
 }
 
-span::after {
+.span-form-select::after {
     content: "▼";
     width: 30.71px;
     height: 20px;
@@ -194,22 +200,32 @@ span::after {
 }
 
 /* 確認画面ボタン　枠組み */
-.content-link-container {
+.content-button-container {
     width: 100%;
     text-align: center;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 /* 確認ボタン */
-.content-link-confirm {
+.content-button-confirm {
     display: inline-block;
     width: 160px;
     height: 46px;
     text-decoration: none;
-    padding: 10px 40px;
+    padding: 10px 20px;
+    border: none;
     background-color: #82756A;
     font-family: Inika;
     font-size: 20px;
     font-weight: 400;
     color: #ffffff;
+    cursor: pointer;
+}
+
+/* エラーメッセージ */
+.error-message {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    color: red;
 }

@@ -82,7 +82,7 @@ body {
 
 /* コンテンツ　行 */
 .form-group:nth-child(2) {
-    margin: 10% 0;
+    margin: 30px 0;
 }
 
 /* ラベル */
@@ -120,4 +120,12 @@ body {
     border: none;
     background-color: #82756A;
     cursor: pointer;
+}
+
+/* エラーメッセージ */
+.error-message {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    color: red;
 }
