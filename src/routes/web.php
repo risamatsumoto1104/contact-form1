@@ -29,8 +29,9 @@ Route::get('/confirm', [ConfirmController::class, 'index']);
 
 Route::get('/thanks', [ThanksController::class, 'index']);
 
-
-Route::get('/admin', [AdminController::class, 'index']);
+Route::middleware('auth')->group(function(){
+    Route::get('/admin', [AdminController::class, 'index']);
+});
 
 
 Route::get('/register', [RegisterController::class, 'index']);
