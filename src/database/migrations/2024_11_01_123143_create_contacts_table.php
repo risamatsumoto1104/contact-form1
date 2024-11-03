@@ -18,11 +18,11 @@ class CreateContactsTable extends Migration
             $table->integer('category_id');
             $table->string('first_name', 255);
             $table->string('last_name', 255);
-            $table->string('gender');
+            $table->string('gender',10);
             $table->string('email', 255);
             $table->string('tell', 255);
             $table->string('address', 255);
-            $table->string('building', 255);
+            $table->string('building', 255)->nullable();
             $table->text('detail');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

@@ -17,12 +17,16 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-// 入力ページ
+// 入力
 Route::get('/', [ContactController::class, 'index']);
-// 確認ページ
+// 確認
 Route::post('/confirm', [ContactController::class, 'confirm']);
-// データ保存処理
-Route::post('/thanks', [ContactController::class, 'store']);
+// 保存
+Route::post('/thanks', [ContactController::class, 'store'])->name('contact.store');
+// 完了
+Route::get('/thanks', function () {
+    return view('thanks');
+})->name('thanks');
 
 
 Route::middleware('auth')->group(function(){
