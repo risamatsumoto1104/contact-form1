@@ -22,8 +22,8 @@
             <div class="content-form-group">
                 <p class="content-form-label-required">お名前</p>
                 <div class="content-form-inner-name">
-                    <input class="form-input-name" type="text" name="last_name" placeholder="例:山田" value="{{ old('last_name') ?? session('contact_data.last_name')}}" >
-                    <input class="form-input-name"  type="text" name="first_name" placeholder="例:太郎" value="{{ old('first_name') ?? session('contact_data.first_name')}}" >
+                    <input class="form-input-name" type="text" name="last_name" placeholder="例:山田" value="{{ old('last_name') }}" >
+                    <input class="form-input-name"  type="text" name="first_name" placeholder="例:太郎" value="{{ old('first_name') }}" >
                 </div>
             </div>
             {{-- エラーメッセージの表示 --}}
@@ -55,7 +55,7 @@
             <div class="content-form-group">
                 <p class="content-form-label-required">メールアドレス</p>
                 <div class="content-form-inner">
-                    <input class="form-input" type="email" name="email" placeholder="例:test@example.com" value="{{ old('email') ?? session('contact_data.email') }}" >
+                    <input class="form-input" type="email" name="email" placeholder="例:test@example.com" value="{{ old('email') }}" >
                 </div>
             </div>
             {{-- エラーメッセージの表示 --}}
@@ -68,11 +68,11 @@
             <div class="content-form-group">
                 <p class="content-form-label-required">電話番号</p>
                 <div class="content-form-inner-tel">
-                    <input class="form-input-tel" type="tel" name="tell-first" placeholder="080" value="{{ old('tell-first') ?? session('contact_data.tell-first') }}" >
+                    <input class="form-input-tel" type="tel" name="tell-first" placeholder="080" value="{{ old('tell-first') }}" >
                     <p class="tel-hyphen">-</p>
-                    <input class="form-input-tel" type="tel" name="tell-second" placeholder="1234" value="{{ old('tell-second') ?? session('contact_data.tell-second') }}" >
+                    <input class="form-input-tel" type="tel" name="tell-second" placeholder="1234" value="{{ old('tell-second') }}" >
                     <p class="tel-hyphen">-</p>
-                    <input class="form-input-tel" type="tel" name="tell-third" placeholder="5678" value="{{ old('tell-third') ?? session('contact_data.tell-third') }}" >
+                    <input class="form-input-tel" type="tel" name="tell-third" placeholder="5678" value="{{ old('tell-third') }}" >
                 </div>
             </div>
             {{-- エラーメッセージの表示 --}}
@@ -92,7 +92,7 @@
             <div class="content-form-group">
                 <p class="content-form-label-required">住所</p>
                 <div class="content-form-inner">
-                    <input class="form-input" type="text" name="address" placeholder="例:東京都渋谷区千駄ヶ谷1-2-3" value="{{ old('address') ?? session('contact_data.address') }}" >
+                    <input class="form-input" type="text" name="address" placeholder="例:東京都渋谷区千駄ヶ谷1-2-3" value="{{ old('address') }}" >
                 </div>
             </div>
             {{-- エラーメッセージの表示 --}}
@@ -105,7 +105,7 @@
             <div class="content-form-group">
                 <p class="content-form-label">建物名</p>
                 <div class="content-form-inner">
-                    <input class="form-input" type="text" name="building" placeholder="例:千駄ヶ谷マンション101" value="{{ old('building') ?? session('contact_data.building') }}" >
+                    <input class="form-input" type="text" name="building" placeholder="例:千駄ヶ谷マンション101" value="{{ old('building') }}" >
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
 
             <div class="content-form-group">
                 <p class="content-form-label-required">お問い合わせ内容</p>
-                <textarea class="form-textarea" name="detail" placeholder="お問い合わせ内容をご記載ください">{{ old('detail') ?? session('contact_data.detail') }}</textarea>
+                <textarea class="form-textarea" name="detail" placeholder="お問い合わせ内容をご記載ください">{{ old('detail') }}</textarea>
             </div>
             {{-- エラーメッセージの表示 --}} 
             <div class="error-group">
@@ -144,7 +144,7 @@
 
             {{-- 確認画面ページへ遷移 --}}
             <div class="content-button-container">
-                <button class="content-button-confirm" type="submit">確認画面</button>
+                <input class="content-button-confirm" type="submit" value="確認画面">
             </div>
         </form>
     </main>

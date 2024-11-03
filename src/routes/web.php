@@ -2,11 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ConfirmController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ThanksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,16 +17,12 @@ use App\Http\Controllers\ThanksController;
 |
 */
 
+// 入力ページ
 Route::get('/', [ContactController::class, 'index']);
+// 確認ページ
 Route::post('/confirm', [ContactController::class, 'confirm']);
-
-
-Route::post('/confirm', [ConfirmController::class, 'confirm']);
-Route::post('/thanks', [ConfirmController::class, 'store']);
-Route::post('/', [ConfirmController::class, 'back']);
-
-
-Route::get('/thanks', [ThanksController::class, 'index']);
+// データ保存処理
+Route::post('/thanks', [ContactController::class, 'store']);
 
 
 Route::middleware('auth')->group(function(){
