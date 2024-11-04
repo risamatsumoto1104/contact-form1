@@ -83,15 +83,14 @@ body {
 .form-input-text,
 .form-select-gender,
 .form-select-kind,
-.form-input-calender {
+.form-input-calendar {
     border: solid 1px #E3DED9;
     height: 50px;
 }
 
-/* 共通設定（性別セレクト・種類セレクト・カレンダー） */
+/* 共通設定（性別セレクト・種類セレクト） */
 .form-select-gender,
-.form-select-kind,
-.form-input-calender {
+.form-select-kind {
     font-family: Inika;
     font-size: 17px;
     font-weight: 400;
@@ -101,6 +100,7 @@ body {
     padding-right: 30px;
     appearance: none;
     position: relative;
+    cursor: pointer;
 }
 
 /* 共通設定（検索ボタン・リセットボタン） */
@@ -114,6 +114,7 @@ body {
     font-weight: 400;
     color: #FFFFFF;
     text-align: center;
+    cursor: pointer;
 }
 
 
@@ -138,23 +139,37 @@ body {
     width: 223.04px;
 }
 
-/* フォーム1行目　カレンダー */
-.form-input-calender {
+/* フォーム1行目　カレンダーの設定 */
+.form-input-calendar {
     width: 148.87px;
+    font-family: Inika;
+    font-size: 17px;
+    font-weight: 400;
+    color: #8B7969;
+    background-color: #F4F4F4;
+    padding-left: 10px;
+    appearance: none;
+    position: relative;
+    cursor: pointer;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
+/* カレンダー枠組み */
+.form-container-search-group-calendar {
+    position: relative;
+    display: inline-block;
 }
 
 /* 矢印アイコンを疑似要素で追加 */
 /* ※セレクトタグには疑似要素は適用できない */
-.form-container-search-group-select {
+.form-container-search-group-select,
+.form-input-calendar {
     position: relative;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .form-container-search-group-select::after,
-.form-input-calender::after {
+.form-input-calendar::after {
     content: "▼";
     width: 17.22px;
     height: 20px;
@@ -190,14 +205,45 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 400;
     color: #8B7969;
     text-align: center;
-
+    cursor: pointer;
 }
 
-/* ページネーション */
+/* ページネーション 全体 */
 .pagination {
     width: 219px;
     height: 31px;
-    border: solid 1px #E0DFDE;
+    font-size: 18px;
+    font-weight: 400;
+    border-top: 1px solid #E0DFDE;
+    border-left: 1px solid #E0DFDE;
+    border-bottom: 1px solid #E0DFDE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* ページネーション　各ページの番号・矢印リンク */
+.pagination-icon {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid #E0DFDE;
+    color: #8B7969;
+    text-decoration: none;
+}
+
+/* ページネーション　現在ページ */
+.pagination-icon.active {
+    background-color: #8B7969;
+    color: #FFFFFF;
+}
+
+/* ページネーション　無効なリンク */
+.pagination-icon.disabled {
+    color: #BEB1A6;
+    pointer-events: none;
 }
 
 /* テーブル全体 */
@@ -240,9 +286,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #8B7969;
 }
 
-/* 詳細ボタン　枠組み */
-.table-detail-button {}
-
 /* 詳細ボタン */
 .table-form-button {
     width: 76px;
@@ -255,4 +298,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 400;
     color: #D9C6B5;
     text-align: center;
+    cursor: pointer;
 }

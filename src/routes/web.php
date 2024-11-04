@@ -32,6 +32,7 @@ Route::get('/thanks', function () {
 Route::middleware('auth')->group(function(){
     Route::get('/admin', [AdminController::class, 'index']);
 });
+Route::get('/admin', [AdminController::class, 'search'])->name('admin.search');
 
 
 Route::get('/register', [RegisterController::class, 'index']);
