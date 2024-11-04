@@ -37,12 +37,7 @@ class AdminController extends Controller
             ->dateSearch($request->input('calendar'));
 
             // 検索結果を取得
-            $contacts = $query->paginate(7)->appends([
-                'user' => $request->input('user'),
-                'gender' => $request->input('gender'),
-                'category_id' => $request->input('category_id'),
-                'calendar' => $request->input('calendar')
-            ]);
+            $contacts = $query->paginate(7)->appends($request->only(['user', 'gender', 'category_id', 'calendar']));
 
         } else {
             // 条件がない場合は空のコレクションを返す
@@ -50,5 +45,28 @@ class AdminController extends Controller
         }
 
         return view('admin', compact('contacts', 'categories'));
+    }
+
+    public function getContactDetails(Request $request) {
+        // IDを取得
+        $contactId = $request->input('id');
+
+        // 連絡先の詳細を取得
+        $contact = Contact::with('category')->find($contactId);
+
+        // データが見つからない場合の処理
+        if (!$contact) {
+            return response()->json(['error' => 'Contact not found'], 404);
+        }
+
+        // データを返す
+        return response()->json($contact);
+    }
+
+    public function destroy(Request $request)
+    {
+        Contact::destroy($request->id);
+
+        return redirect('/admin');
     }
 }

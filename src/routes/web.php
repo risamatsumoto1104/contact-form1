@@ -29,15 +29,18 @@ Route::get('/thanks', function () {
 })->name('thanks');
 
 
-Route::middleware('auth')->group(function(){
-    Route::get('/admin', [AdminController::class, 'index']);
-});
+// 管理画面
+Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin', [AdminController::class, 'search'])->name('admin.search');
+Route::post('/admin', [AdminController::class, 'getContactDetails']);
+Route::delete('/admin', [AdminController::class, 'destroy']);
 
 
+// ユーザー登録
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 
+// ログイン
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'store']);

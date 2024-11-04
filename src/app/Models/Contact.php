@@ -21,11 +21,13 @@ class Contact extends Model
         'detail'
     ];
 
+    // リレーション
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    // 検索
     public function scopeUserSearch($query, $input)
     {
         if(!empty($input)){

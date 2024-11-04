@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
@@ -113,15 +114,65 @@
                 <td class="table-data">{{ $contact->email }}</td>
                 <td class="table-data">{{ $contact->category->content }}</td>
                 <td class="table-detail-button">
-                    <form class="table-form">
-                        <button class="table-form-button">詳細</button>
+                    <form class="table-form" onsubmit="event.preventDefault(); openModal({{ $contact->id }});">
+                        <button class="table-form-button" type="submit">詳細</button>
                     </form>
                 </td>
             </tr>
             @endforeach
         </table>
-
     </main>
+
+    {{-- モーダルウィンドウの構造 --}}
+    <div class="modal-content" id="modal">
+        {{-- ×ボタン --}}
+        <span class="close-button" onclick="closeModel()">&times;</span>
+        {{-- モーダルの内容 --}}
+        <table class="modal-content-table">
+            <tr class="modal-table-row">
+                <th class="modal-table-label">お名前</th>
+                <td class="modal-table-data" id="modal-name">データ</td>
+            </tr>            
+            <tr class="modal-table-row">
+                <th class="modal-table-label">性別</th>
+                <td class="modal-table-data" id="modal-gender">データ</td>
+            </tr>            
+            <tr class="modal-table-row">
+                <th class="modal-table-label">メールアドレス</th>
+                <td class="modal-table-data" id="modal-email">データ</td>
+            </tr>                
+            <tr class="modal-table-row">                
+                <th class="modal-table-label">電話番号</th>
+                <td class="modal-table-data" id="modal-tell">データ</td>
+            </tr>                
+            <tr class="modal-table-row">                
+                <th class="modal-table-label">住所</th>
+                <td class="modal-table-data" id="modal-address">データ</td>
+            </tr>                
+            <tr class="modal-table-row">                
+                <th class="modal-table-label">建物名</th>
+                <td class="modal-table-data" id="modal-building">データ</td>
+            </tr>                
+            <tr class="modal-table-row">                
+                <th class="modal-table-label">お問い合わせの種類</th>
+                <td class="modal-table-data" id="modal-category">データ</td>
+            </tr>                
+            <tr class="modal-table-row">                
+                <th class="modal-table-label">お問い合わせ内容</th>
+                <td class="modal-table-data" id="modal-detail">データ</td>
+            </tr>
+        </table>
+        {{-- 削除ボタン --}}
+        <form class="modal-delete-form" action="{{ url('/admin') }}" method="POST">
+        @csrf
+        @method('DELETE')
+                <div class="form-group">
+                    <input type="hidden" name="id" id="modal-id">
+                    <button class="delete-button" type="submit">削除</button>
+                </div>
+        </form>
+    </div>
+<script src="{{ asset('js/modal.js') }}"></script>
 </body>
 
 </html>
