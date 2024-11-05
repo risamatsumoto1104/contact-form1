@@ -67,4 +67,70 @@ class AdminController extends Controller
 
         return redirect('/admin');
     }
+
+    // エクスポート
+    public function exportToCSV(Request $request)
+    {
+        // 検索条件を取得（必要に応じてフィルタリングの実装を行う）
+        $query = Contact::query();
+
+        if ($request->filled('user')) {
+            $query->where(function($q) use ($request) {
+                $q->where('last_name', 'like', '%' . $request->user . '%')
+                ->orWhere('first_name', 'like', '%' . $request->user . '%')
+                ->orWhere('email', 'like', '%' . $request->user . '%');
+            });
+        }
+
+        // genderが'All'でない場合はフィルタリング
+        if ($request->filled('gender') && $request->gender !== 'All') {
+            $query->where('gender', $request->gender);
+        }
+
+        // カテゴリーが設定されている場合
+        if ($request->filled('category_id') && $request->category_id !== '') {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->filled('calendar')) {
+            $query->whereDate('created_at', $request->calendar);
+        }
+
+        // フィルタリングされた結果を取得
+        $contacts = $query->get();
+
+        // CSVの作成
+        $csvFileName = 'contacts_' . date('Ymd') . '.csv';
+        $headers = array(
+            "Content-type" => "text/csv; charset=UTF-8",
+            "Content-Disposition" => "attachment; filename=$csvFileName",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0",
+        );
+
+        $handle = fopen('php://output', 'w');
+        // UTF-8 BOMの追加（Excelでの文字化け防止）
+        fwrite($handle, "\xEF\xBB\xBF");
+        
+        // ヘッダー行
+        fputcsv($handle, ['お名前', '性別', 'メールアドレス', '電話番号', '住所', '建物名', 'お問い合わせの種類', 'お問い合わせ内容']);
+
+        foreach ($contacts as $contact) {
+            fputcsv($handle, [
+                $contact['last_name'] . ' ' . $contact['first_name'],
+                $contact['gender'],
+                $contact['email'],
+                $contact['tell'],
+                $contact['address'],
+                $contact['building'],
+                $contact->category->content,
+                $contact['detail']
+            ]);
+        }
+
+        return response()->stream(function() use ($handle) {
+            fclose($handle);
+        }, 200, $headers);
+    }
 }

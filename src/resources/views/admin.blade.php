@@ -31,12 +31,12 @@
 
                 <div class="form-container-search-group-select">
                     <select class="form-select-gender" name="gender">
-                            {{-- デフォルトで表示 --}}
-                            <option value="" disabled selected>性別</option>
-                            <option value="全て">全て</option>
-                            <option value="男性">男性</option>
-                            <option value="女性">女性</option>
-                            <option value="その他">その他</option>
+                        {{-- デフォルトで表示 --}}
+                        <option value="" disabled selected>性別</option>
+                        <option value="全て">全て</option>
+                        <option value="男性">男性</option>
+                        <option value="女性">女性</option>
+                        <option value="その他">その他</option>
                     </select>
                 </div>
 
@@ -63,41 +63,50 @@
                     <button class="form-button-reset" type="button" onclick="location.href='{{ url('/admin') }}'">リセット</button>
                 </div>
             </div>
-            {{-- 2行目 --}}
-            <div class="content-form-container">
-                <div class="export-container">
-                    <button class="form-button-export">エクスポート</button>
-                </div>
+        </form>
 
-                {{-- ページネーション --}}
-                @if ($contacts->isNotEmpty())
-                <div class="pagination">
-                    {{-- 前のページへのリンク --}}
-                    @if ($contacts->onFirstPage())
-                    <span class="pagination-icon disabled"><</span>
-                    @else
-                    <a class="pagination-icon" href="{{ $contacts->previousPageUrl() }}"><</a>
-                    @endif
+        {{-- 2行目 --}}
+        <div class="content-form-container">
+            {{-- エクスポート --}}
+            <div class="export-container">
+                <form action="{{ route('admin.export') }}" method="GET">
+                {{-- getの為CSRFトークンいらない --}}
+                    <input type="hidden" name="user" value="{{ request('user') }}">
+                    <input type="hidden" name="gender" value="{{ request('gender', 'All') }}">
+                    <input type="hidden" name="category_id" value="{{ request('category_id') }}">
+                    <input type="hidden" name="calendar" value="{{ request('calendar') }}">
+                    <button class="form-button-export" type="submit">エクスポート</button>
+                </form>
+            </div>
 
-                    {{-- ページ番号リンク --}}
-                    @for ($i = 1; $i <= $contacts->lastPage(); $i++)
-                    @if ($i == $contacts->currentPage())
-                    <span class="pagination-icon active">{{ $i }}</span>
-                    @else
-                    <a class="pagination-icon" href="{{ $contacts->url($i) }}">{{ $i }}</a>
-                    @endif
-                    @endfor
+            {{-- ページネーション --}}
+            @if ($contacts->isNotEmpty())
+            <div class="pagination">
+                {{-- 前のページへのリンク --}}
+                @if ($contacts->onFirstPage())
+                <span class="pagination-icon disabled"><</span>
+                @else
+                <a class="pagination-icon" href="{{ $contacts->previousPageUrl() }}"><</a>
+                @endif
 
-                    {{-- 次のページへのリンク --}}
-                    @if ($contacts->hasMorePages())
-                    <a class="pagination-icon" href="{{ $contacts->nextPageUrl() }}">></a>
-                    @else
-                    <span class="pagination-icon disabled">></span>
-                    @endif
-                </div>
+                {{-- ページ番号リンク --}}
+                @for ($i = 1; $i <= $contacts->lastPage(); $i++)
+                @if ($i == $contacts->currentPage())
+                <span class="pagination-icon active">{{ $i }}</span>
+                @else
+                <a class="pagination-icon" href="{{ $contacts->url($i) }}">{{ $i }}</a>
+                @endif
+                @endfor
+
+                {{-- 次のページへのリンク --}}
+                @if ($contacts->hasMorePages())
+                <a class="pagination-icon" href="{{ $contacts->nextPageUrl() }}">></a>
+                @else
+                <span class="pagination-icon disabled">></span>
                 @endif
             </div>
-        </form>
+            @endif
+        </div>
 
         <table class="content-table">
             <tr class="table-row-title">
@@ -193,7 +202,7 @@
                     document.getElementById('modal-building').innerText = data.building;
                     document.getElementById('modal-category').innerText = data.category.content;
                     document.getElementById('modal-detail').innerText = data.detail;
-                    
+
                     // モーダルを開く際にIDを設定
                     document.getElementById('modal-id').value = data.id;
 
