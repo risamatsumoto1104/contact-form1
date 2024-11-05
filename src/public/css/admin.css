@@ -303,11 +303,11 @@ body {
 
 /* モーダルウィンドウ 全体 */
 .modal-content {
+    /* 初期状態は非表示 */
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 62px;
+    left: 353.5px;
     width: 805px;
     height: 858px;
     border: 1px solid #8B7969;
@@ -316,42 +316,88 @@ body {
     z-index: 1000;
 }
 
-/* モーダルウィンドウ　行 */
-.modal-table-row {
-    width: 473px;
+/* 枠組み共通 */
+.modal-close-button-container,
+.modal-content-container,
+.modal-delete-button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ×ボタン 枠組み */
+.modal-close-button-container {
+    justify-self: flex-end;
+}
+
+/* 内容　枠組み */
+.modal-content-container {
+    justify-self: center;
+    align-items: center;
+    margin-top: 10%;
+    width: 593px;
+}
+
+/* 削除ボタン　枠組み */
+.modal-delete-button-container {
+    justify-self: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+/* ×ボタン */
+.close-button {
+    width: 40px;
+    height: 42px;
+    margin: 30px 30px 0 0;
+    border: solid 1px #8B7969;
+    border-radius: 50%;
     text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    color: #8B7969;
+    cursor: pointer;
+}
+
+/* モーダルウィンドウ　行 */
+.modal-table-row:not(:last-child) {
+    text-align: left;
+    width: 593px;
+    height: 60px;
+}
+
+.modal-table-row:last-child {
+    text-align: left;
+    width: 473px;
+    height: 120px;
 }
 
 /* モーダルウィンドウ　ラベル */
 .modal-table-label {
     width: 180px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #8B7969;
 }
 
 /* モーダルウィンドウ　内容 */
 .modal-table-data {
-    width: 485px;
-}
-
-.close-button {
-    float: right;
+    width: 413px;
     font-size: 20px;
-    cursor: pointer;
+    font-weight: 400;
+    color: #8B7969;
+    padding-left: 30px;
 }
 
-.modal-delete-form {
-    margin-top: 20px;
-}
-
-/* ボタンのスタイル */
+/* 削除ボタン */
 .delete-button {
-    padding: 10px 15px;
+    width: 76px;
+    height: 39px;
+    padding: 8px 20px;
     border: none;
-    border-radius: 4px;
-    background-color: #f44336;
-    color: white;
+    background-color: #BA370D;
+    font-family: Inika;
+    font-size: 18px;
+    font-weight: 400;
+    color: #FFFFFF;
     cursor: pointer;
-}
-
-.delete-button:hover {
-    opacity: 0.8;
 }

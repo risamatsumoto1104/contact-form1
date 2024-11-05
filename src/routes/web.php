@@ -31,9 +31,12 @@ Route::get('/thanks', function () {
 
 // 管理画面
 Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin', [AdminController::class, 'search'])->name('admin.search');
-Route::post('/admin', [AdminController::class, 'getContactDetails']);
-Route::delete('/admin', [AdminController::class, 'destroy']);
+// 検索機能
+Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+// 詳細の取得
+Route::get('/admin/contact/{id}', [AdminController::class, 'getContactDetails'])->name('admin.contact.details');
+// 削除
+Route::delete('/admin/contact/{id}', [AdminController::class, 'destroy'])->name('admin.contact');
 
 
 // ユーザー登録

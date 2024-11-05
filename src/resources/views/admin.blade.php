@@ -21,7 +21,7 @@
 
     <main class="main-content">
         <h2 class="main-content-title">admin</h2>
-        <form class="content-form" action="{{ route('admin.search')}}" method="GET">
+        <form class="content-form" action="{{ route('admin.search') }}" method="GET">
         {{-- getの為CSRFトークンいらない --}}
             {{-- 1行目 --}}
             <div class="content-form-container-search">
@@ -114,9 +114,8 @@
                 <td class="table-data">{{ $contact->email }}</td>
                 <td class="table-data">{{ $contact->category->content }}</td>
                 <td class="table-detail-button">
-                    <form class="table-form" onsubmit="event.preventDefault(); openModal({{ $contact->id }});">
-                        <button class="table-form-button" type="submit">詳細</button>
-                    </form>
+                    {{-- ボタンを押すとモーダルウィンドウが開く --}}
+                    <button class="table-form-button" type="button" onclick="showDetails({{ $contact->id }})">詳細</button>
                 </td>
             </tr>
             @endforeach
@@ -126,53 +125,93 @@
     {{-- モーダルウィンドウの構造 --}}
     <div class="modal-content" id="modal">
         {{-- ×ボタン --}}
-        <span class="close-button" onclick="closeModel()">&times;</span>
+        <div class="modal-close-button-container">
+            <span class="close-button">&times;</span>
+        </div>
         {{-- モーダルの内容 --}}
-        <table class="modal-content-table">
-            <tr class="modal-table-row">
-                <th class="modal-table-label">お名前</th>
-                <td class="modal-table-data" id="modal-name">データ</td>
-            </tr>            
-            <tr class="modal-table-row">
-                <th class="modal-table-label">性別</th>
-                <td class="modal-table-data" id="modal-gender">データ</td>
-            </tr>            
-            <tr class="modal-table-row">
-                <th class="modal-table-label">メールアドレス</th>
-                <td class="modal-table-data" id="modal-email">データ</td>
-            </tr>                
-            <tr class="modal-table-row">                
-                <th class="modal-table-label">電話番号</th>
-                <td class="modal-table-data" id="modal-tell">データ</td>
-            </tr>                
-            <tr class="modal-table-row">                
-                <th class="modal-table-label">住所</th>
-                <td class="modal-table-data" id="modal-address">データ</td>
-            </tr>                
-            <tr class="modal-table-row">                
-                <th class="modal-table-label">建物名</th>
-                <td class="modal-table-data" id="modal-building">データ</td>
-            </tr>                
-            <tr class="modal-table-row">                
-                <th class="modal-table-label">お問い合わせの種類</th>
-                <td class="modal-table-data" id="modal-category">データ</td>
-            </tr>                
-            <tr class="modal-table-row">                
-                <th class="modal-table-label">お問い合わせ内容</th>
-                <td class="modal-table-data" id="modal-detail">データ</td>
-            </tr>
-        </table>
+        <div class="modal-content-container">
+            <table class="modal-content-table">
+                <tr class="modal-table-row">
+                    <th class="modal-table-label">お名前</th>
+                    <td class="modal-table-data" id="modal-name">データ</td>
+                </tr>            
+                <tr class="modal-table-row">
+                    <th class="modal-table-label">性別</th>
+                    <td class="modal-table-data" id="modal-gender">データ</td>
+                </tr>            
+                <tr class="modal-table-row">
+                    <th class="modal-table-label">メールアドレス</th>
+                    <td class="modal-table-data" id="modal-email">データ</td>
+                </tr>                
+                <tr class="modal-table-row">                
+                    <th class="modal-table-label">電話番号</th>
+                    <td class="modal-table-data" id="modal-tell">データ</td>
+                </tr>                
+                <tr class="modal-table-row">                
+                    <th class="modal-table-label">住所</th>
+                    <td class="modal-table-data" id="modal-address">データ</td>
+                </tr>                
+                <tr class="modal-table-row">                
+                    <th class="modal-table-label">建物名</th>
+                    <td class="modal-table-data" id="modal-building">データ</td>
+                </tr>                
+                <tr class="modal-table-row">                
+                    <th class="modal-table-label">お問い合わせの種類</th>
+                    <td class="modal-table-data" id="modal-category">データ</td>
+                </tr>                
+                <tr class="modal-table-row">                
+                    <th class="modal-table-label">お問い合わせ内容</th>
+                    <td class="modal-table-data" id="modal-detail">データ</td>
+                </tr>
+            </table>
+        </div>
         {{-- 削除ボタン --}}
-        <form class="modal-delete-form" action="{{ url('/admin') }}" method="POST">
-        @csrf
-        @method('DELETE')
-                <div class="form-group">
-                    <input type="hidden" name="id" id="modal-id">
-                    <button class="delete-button" type="submit">削除</button>
-                </div>
-        </form>
+        <div class="modal-delete-button-container">
+            <form class="modal-delete-form" id="delete-contact-form" method="POST">
+            @csrf
+            @method('DELETE')
+                <input type="hidden" name="id" id="modal-id">
+                <button class="delete-button" type="submit">削除</button>
+            </form>
+        </div>
     </div>
-<script src="{{ asset('js/modal.js') }}"></script>
+
+    {{-- モーダルウィンドウを表示するためのJavaScript --}}
+    <script>
+        function showDetails(contactId) {
+            // fetchを使って指定されたcontactIdの詳細情報を取得
+            fetch(`/admin/contact/${contactId}`)
+                // レスポンスをJSON形式で解析
+                .then(response => response.json())
+                .then(data => {
+                    // モーダルの各要素にデータを設定
+                    document.getElementById('modal-name').innerText = data.last_name + ' ' + data.first_name;
+                    document.getElementById('modal-gender').innerText = data.gender;
+                    document.getElementById('modal-email').innerText = data.email;
+                    document.getElementById('modal-tell').innerText = data.tell;
+                    document.getElementById('modal-address').innerText = data.address;
+                    document.getElementById('modal-building').innerText = data.building;
+                    document.getElementById('modal-category').innerText = data.category.content;
+                    document.getElementById('modal-detail').innerText = data.detail;
+                    
+                    // モーダルを開く際にIDを設定
+                    document.getElementById('modal-id').value = data.id;
+
+                    // 削除フォームのactionを設定
+                    document.getElementById('delete-contact-form').action = `/admin/contact/${data.id}`;
+
+                    // モーダルを表示
+                    document.getElementById('modal').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching contact details:', error));
+        }
+
+        document.querySelector('.close-button').onclick = function() {
+            // モーダルを閉じる
+            document.getElementById('modal').style.display = 'none';
+        }
+
+    </script>
 </body>
 
 </html>

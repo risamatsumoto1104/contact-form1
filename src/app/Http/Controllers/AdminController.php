@@ -8,6 +8,7 @@ use App\Models\Category;
 
 class AdminController extends Controller
 {
+    // 管理画面の表示
     public function index()
     {
         // 初期表示時は空のコレクションを渡す
@@ -16,10 +17,14 @@ class AdminController extends Controller
         // カテゴリーデータの取得
         $categories = Category::all();
 
+        // 初期値としてnullを設定
+        $modalContactId = null;
+
         // 管理画面ページの表示
-        return view('admin',compact('contacts', 'categories'));
+        return view('admin',compact('contacts', 'categories', 'modalContactId'));
     }
 
+    // 検索機能
     public function search(Request $request)
     {
         // Contactモデルに基づくクエリビルダを作成
@@ -47,25 +52,18 @@ class AdminController extends Controller
         return view('admin', compact('contacts', 'categories'));
     }
 
-    public function getContactDetails(Request $request) {
-        // IDを取得
-        $contactId = $request->input('id');
-
-        // 連絡先の詳細を取得
-        $contact = Contact::with('category')->find($contactId);
-
-        // データが見つからない場合の処理
-        if (!$contact) {
-            return response()->json(['error' => 'Contact not found'], 404);
-        }
-
-        // データを返す
+    // 特定の連絡先の詳細情報を取得して、モーダルウィンドウに表示する
+    public function getContactDetails($id)
+    {
+        $contact = Contact::with('category')->findOrFail($id);
         return response()->json($contact);
     }
 
-    public function destroy(Request $request)
+    // 削除機能
+    public function destroy($id)
     {
-        Contact::destroy($request->id);
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
 
         return redirect('/admin');
     }
