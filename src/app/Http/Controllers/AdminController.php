@@ -21,7 +21,7 @@ class AdminController extends Controller
         $modalContactId = null;
 
         // 管理画面ページの表示
-        return view('admin',compact('contacts', 'categories', 'modalContactId'));
+        return view('admin', compact('contacts', 'categories', 'modalContactId'));
     }
 
     // 検索機能
@@ -36,14 +36,13 @@ class AdminController extends Controller
         // 検索条件が指定されている場合のみデータを取得
         if ($request->filled('user') || $request->filled('gender') || $request->filled('category_id') || $request->filled('calendar')) {
             $query = $query
-            ->userSearch($request->input('user'))
-            ->genderSearch($request->input('gender'))
-            ->categorySearch($request->input('category_id'))
-            ->dateSearch($request->input('calendar'));
+                ->userSearch($request->input('user'))
+                ->genderSearch($request->input('gender'))
+                ->categorySearch($request->input('category_id'))
+                ->dateSearch($request->input('calendar'));
 
             // 検索結果を取得
             $contacts = $query->paginate(7)->appends($request->only(['user', 'gender', 'category_id', 'calendar']));
-
         } else {
             // 条件がない場合は空のコレクションを返す
             $contacts = collect();
@@ -75,10 +74,10 @@ class AdminController extends Controller
         $query = Contact::query();
 
         if ($request->filled('user')) {
-            $query->where(function($q) use ($request) {
+            $query->where(function ($q) use ($request) {
                 $q->where('last_name', 'like', '%' . $request->user . '%')
-                ->orWhere('first_name', 'like', '%' . $request->user . '%')
-                ->orWhere('email', 'like', '%' . $request->user . '%');
+                    ->orWhere('first_name', 'like', '%' . $request->user . '%')
+                    ->orWhere('email', 'like', '%' . $request->user . '%');
             });
         }
 
@@ -112,7 +111,7 @@ class AdminController extends Controller
         $handle = fopen('php://output', 'w');
         // UTF-8 BOMの追加（Excelでの文字化け防止）
         fwrite($handle, "\xEF\xBB\xBF");
-        
+
         // ヘッダー行
         fputcsv($handle, ['お名前', '性別', 'メールアドレス', '電話番号', '住所', '建物名', 'お問い合わせの種類', 'お問い合わせ内容']);
 
@@ -129,7 +128,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return response()->stream(function() use ($handle) {
+        return response()->stream(function () use ($handle) {
             fclose($handle);
         }, 200, $headers);
     }

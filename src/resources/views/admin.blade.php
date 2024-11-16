@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +23,7 @@
     <main class="main-content">
         <h2 class="main-content-title">admin</h2>
         <form class="content-form" action="{{ route('admin.search') }}" method="GET">
-        {{-- getの為CSRFトークンいらない --}}
+            {{-- getの為CSRFトークンいらない --}}
             {{-- 1行目 --}}
             <div class="content-form-container-search">
                 <div class="form-container-search-group">
@@ -42,12 +43,12 @@
 
                 <div class="form-container-search-group-select">
                     <select class="form-select-kind" name="category_id">
-                            {{-- カテゴリのデフォルトで表示 --}}
-                            <option value="" disabled selected>選択してください</option>
-                            {{-- categoriesテーブルより表示 --}}
-                            @foreach ($categories as $category)
-                            <option value="{{ $category['id'] }}" >{{ $category['content'] }}</option>    
-                            @endforeach
+                        {{-- カテゴリのデフォルトで表示 --}}
+                        <option value="" disabled selected>選択してください</option>
+                        {{-- categoriesテーブルより表示 --}}
+                        @foreach ($categories as $category)
+                            <option value="{{ $category['id'] }}">{{ $category['content'] }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -60,7 +61,8 @@
                 </div>
 
                 <div class="form-container-search-group">
-                    <button class="form-button-reset" type="button" onclick="location.href='{{ url('/admin') }}'">リセット</button>
+                    <button class="form-button-reset" type="button"
+                        onclick="location.href='{{ url('/admin') }}'">リセット</button>
                 </div>
             </div>
         </form>
@@ -70,7 +72,7 @@
             {{-- エクスポート --}}
             <div class="export-container">
                 <form action="{{ route('admin.export') }}" method="GET">
-                {{-- getの為CSRFトークンいらない --}}
+                    {{-- getの為CSRFトークンいらない --}}
                     <input type="hidden" name="user" value="{{ request('user') }}">
                     <input type="hidden" name="gender" value="{{ request('gender', 'All') }}">
                     <input type="hidden" name="category_id" value="{{ request('category_id') }}">
@@ -81,30 +83,30 @@
 
             {{-- ページネーション --}}
             @if ($contacts->isNotEmpty())
-            <div class="pagination">
-                {{-- 前のページへのリンク --}}
-                @if ($contacts->onFirstPage())
-                <span class="pagination-icon disabled"><</span>
-                @else
-                <a class="pagination-icon" href="{{ $contacts->previousPageUrl() }}"><</a>
-                @endif
+                <div class="pagination">
+                    {{-- 前のページへのリンク --}}
+                    @if ($contacts->onFirstPage())
+                        <span class="pagination-icon disabled">&lt;&lt;</span>
+                    @else
+                        <a class="pagination-icon" href="{{ $contacts->previousPageUrl() }}">&lt;&lt;</a>
+                    @endif
 
-                {{-- ページ番号リンク --}}
-                @for ($i = 1; $i <= $contacts->lastPage(); $i++)
-                @if ($i == $contacts->currentPage())
-                <span class="pagination-icon active">{{ $i }}</span>
-                @else
-                <a class="pagination-icon" href="{{ $contacts->url($i) }}">{{ $i }}</a>
-                @endif
-                @endfor
+                    {{-- ページ番号リンク --}}
+                    @for ($i = 1; $i <= $contacts->lastPage(); $i++)
+                        @if ($i == $contacts->currentPage())
+                            <span class="pagination-icon active">{{ $i }}</span>
+                        @else
+                            <a class="pagination-icon" href="{{ $contacts->url($i) }}">{{ $i }}</a>
+                        @endif
+                    @endfor
 
-                {{-- 次のページへのリンク --}}
-                @if ($contacts->hasMorePages())
-                <a class="pagination-icon" href="{{ $contacts->nextPageUrl() }}">></a>
-                @else
-                <span class="pagination-icon disabled">></span>
-                @endif
-            </div>
+                    {{-- 次のページへのリンク --}}
+                    @if ($contacts->hasMorePages())
+                        <a class="pagination-icon" href="{{ $contacts->nextPageUrl() }}">></a>
+                    @else
+                        <span class="pagination-icon disabled">></span>
+                    @endif
+                </div>
             @endif
         </div>
 
@@ -117,16 +119,17 @@
                 <th class="table-label"></th>
             </tr>
             @foreach ($contacts as $contact)
-            <tr class="table-row-data">
-                <td class="table-data">{{ $contact->last_name . ' ' . $contact->first_name }}</td>
-                <td class="table-data">{{ $contact->gender }}</td>
-                <td class="table-data">{{ $contact->email }}</td>
-                <td class="table-data">{{ $contact->category->content }}</td>
-                <td class="table-detail-button">
-                    {{-- ボタンを押すとモーダルウィンドウが開く --}}
-                    <button class="table-form-button" type="button" onclick="showDetails({{ $contact->id }})">詳細</button>
-                </td>
-            </tr>
+                <tr class="table-row-data">
+                    <td class="table-data">{{ $contact->last_name . ' ' . $contact->first_name }}</td>
+                    <td class="table-data">{{ $contact->gender }}</td>
+                    <td class="table-data">{{ $contact->email }}</td>
+                    <td class="table-data">{{ $contact->category->content }}</td>
+                    <td class="table-detail-button">
+                        {{-- ボタンを押すとモーダルウィンドウが開く --}}
+                        <button class="table-form-button" type="button"
+                            onclick="showDetails({{ $contact->id }})">詳細</button>
+                    </td>
+                </tr>
             @endforeach
         </table>
     </main>
@@ -143,32 +146,32 @@
                 <tr class="modal-table-row">
                     <th class="modal-table-label">お名前</th>
                     <td class="modal-table-data" id="modal-name">データ</td>
-                </tr>            
+                </tr>
                 <tr class="modal-table-row">
                     <th class="modal-table-label">性別</th>
                     <td class="modal-table-data" id="modal-gender">データ</td>
-                </tr>            
+                </tr>
                 <tr class="modal-table-row">
                     <th class="modal-table-label">メールアドレス</th>
                     <td class="modal-table-data" id="modal-email">データ</td>
-                </tr>                
-                <tr class="modal-table-row">                
+                </tr>
+                <tr class="modal-table-row">
                     <th class="modal-table-label">電話番号</th>
                     <td class="modal-table-data" id="modal-tell">データ</td>
-                </tr>                
-                <tr class="modal-table-row">                
+                </tr>
+                <tr class="modal-table-row">
                     <th class="modal-table-label">住所</th>
                     <td class="modal-table-data" id="modal-address">データ</td>
-                </tr>                
-                <tr class="modal-table-row">                
+                </tr>
+                <tr class="modal-table-row">
                     <th class="modal-table-label">建物名</th>
                     <td class="modal-table-data" id="modal-building">データ</td>
-                </tr>                
-                <tr class="modal-table-row">                
+                </tr>
+                <tr class="modal-table-row">
                     <th class="modal-table-label">お問い合わせの種類</th>
                     <td class="modal-table-data" id="modal-category">データ</td>
-                </tr>                
-                <tr class="modal-table-row">                
+                </tr>
+                <tr class="modal-table-row">
                     <th class="modal-table-label">お問い合わせ内容</th>
                     <td class="modal-table-data" id="modal-detail">データ</td>
                 </tr>
@@ -177,8 +180,8 @@
         {{-- 削除ボタン --}}
         <div class="modal-delete-button-container">
             <form class="modal-delete-form" id="delete-contact-form" method="POST">
-            @csrf
-            @method('DELETE')
+                @csrf
+                @method('DELETE')
                 <input type="hidden" name="id" id="modal-id">
                 <button class="delete-button" type="submit">削除</button>
             </form>
@@ -219,7 +222,6 @@
             // モーダルを閉じる
             document.getElementById('modal').style.display = 'none';
         }
-
     </script>
 </body>
 
