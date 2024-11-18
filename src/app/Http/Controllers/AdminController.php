@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -40,13 +41,20 @@ class AdminController extends Controller
                 ->genderSearch($request->input('gender'))
                 ->categorySearch($request->input('category_id'))
                 ->dateSearch($request->input('calendar'));
-
-            // 検索結果を取得
-            $contacts = $query->paginate(7)->appends($request->only(['user', 'gender', 'category_id', 'calendar']));
-        } else {
-            // 条件がない場合は空のコレクションを返す
-            $contacts = collect();
         }
+
+        // 性別のラベルを定義
+        $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
+
+        // 検索結果を取得
+        $contacts = $query->paginate(7)->appends($request->only(['user', 'gender', 'category_id', 'calendar']));
+
+        // 検索結果の性別を変換
+        $contacts->getCollection()->transform(function ($contact) use ($genderLabels) {
+            // 数値を対応する性別に変換
+            $contact->gender_label = $genderLabels[$contact->gender] ?? '不明';
+            return $contact;
+        });
 
         return view('admin', compact('contacts', 'categories'));
     }
@@ -54,7 +62,15 @@ class AdminController extends Controller
     // 特定の連絡先の詳細情報を取得して、モーダルウィンドウに表示する
     public function getContactDetails($id)
     {
+        // 特定の連絡先の詳細情報を取得
         $contact = Contact::with('category')->findOrFail($id);
+
+        // 性別のラベルを定義
+        $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
+
+        // 性別のラベルを追加
+        $contact->gender_label = $genderLabels[$contact->gender] ?? '不明';
+
         return response()->json($contact);
     }
 
@@ -70,43 +86,64 @@ class AdminController extends Controller
     // エクスポート
     public function exportToCSV(Request $request)
     {
-        // 検索条件を取得（必要に応じてフィルタリングの実装を行う）
+        // クエリビルダを初期化
         $query = Contact::query();
 
+        // フィルタリング条件を適用
+        $hasFilters = false; // 条件が設定されているかを追跡
+
+        // ユーザー名またはメールでフィルタリング
         if ($request->filled('user')) {
             $query->where(function ($q) use ($request) {
                 $q->where('last_name', 'like', '%' . $request->user . '%')
                     ->orWhere('first_name', 'like', '%' . $request->user . '%')
                     ->orWhere('email', 'like', '%' . $request->user . '%');
             });
+            $hasFilters = true;
         }
 
-        // genderが'All'でない場合はフィルタリング
-        if ($request->filled('gender') && $request->gender !== 'All') {
+        // 性別でフィルタリング（条件が「全て」または未指定ならスキップ）
+        if ($request->filled('gender') && $request->gender !== '全て' && $request->gender !== 'All') {
             $query->where('gender', $request->gender);
+            $hasFilters = true;
         }
 
-        // カテゴリーが設定されている場合
+        // カテゴリーでフィルタリング（条件が未指定ならスキップ）
         if ($request->filled('category_id') && $request->category_id !== '') {
             $query->where('category_id', $request->category_id);
+            $hasFilters = true;
         }
 
+        // 日付でフィルタリング（条件が未指定ならスキップ）
         if ($request->filled('calendar')) {
             $query->whereDate('created_at', $request->calendar);
+            $hasFilters = true;
         }
 
-        // フィルタリングされた結果を取得
-        $contacts = $query->get();
+        // 条件が一切設定されていない場合は全件取得
+        if ($hasFilters) {
+            $contacts = $query->get(); // フィルタリングされた結果を取得
+        } else {
+            $contacts = Contact::all(); // 全件取得
+        }
+
+        // データが空でないかを確認
+        if ($contacts->isEmpty()) {
+            // フィルタリングがかかっていてデータがない場合にのみエラーメッセージ
+            if ($hasFilters) {
+                return back()->with('error', '該当するデータがありません。');
+            }
+        }
 
         // CSVの作成
         $csvFileName = 'contacts_' . date('Ymd') . '.csv';
-        $headers = array(
+        $headers = [
             "Content-type" => "text/csv; charset=UTF-8",
             "Content-Disposition" => "attachment; filename=$csvFileName",
             "Pragma" => "no-cache",
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
             "Expires" => "0",
-        );
+        ];
 
         $handle = fopen('php://output', 'w');
         // UTF-8 BOMの追加（Excelでの文字化け防止）
@@ -123,8 +160,8 @@ class AdminController extends Controller
                 $contact['tell'],
                 $contact['address'],
                 $contact['building'],
-                $contact->category->content,
-                $contact['detail']
+                optional($contact->category)->content, // カテゴリーが存在しない場合の対応
+                $contact['detail'],
             ]);
         }
 

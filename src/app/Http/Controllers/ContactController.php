@@ -16,7 +16,7 @@ class ContactController extends Controller
         $categories = Category::all();
 
         // カテゴリーデータをcontactビューに渡す
-        return view('contact',compact('categories'));
+        return view('contact', compact('categories'));
     }
 
 
@@ -35,8 +35,14 @@ class ContactController extends Controller
             'detail'
         ]);
 
+        // 性別のラベルを定義
+        $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
+
+        // 性別をラベルに変換
+        $contact['gender_label'] = $genderLabels[$contact['gender']] ?? '不明';
+
         // リクエストデータから電話番号を結合し、'tell'に格納
-        $contact['tell'] = $request->input('tell-first'). '-'. $request->input('tell-second'). '-'.  $request->input('tell-third');
+        $contact['tell'] = $request->input('tell-first') . '-' . $request->input('tell-second') . '-' .  $request->input('tell-third');
 
         // フラッシュデータにリクエストデータを保存
         $request->flashOnly([
@@ -63,7 +69,7 @@ class ContactController extends Controller
 
     // データベースにお問い合わせ内容を保存
     public function store(Request $request)
-    {   
+    {
         // リクエストデータからcontact（入力データ）を取得
         $contact = $request->only([
             'last_name',
@@ -77,7 +83,7 @@ class ContactController extends Controller
         ]);
 
         // リクエストデータから電話番号を結合し、'tell'に格納
-        $contact['tell'] = $request->input('tell-first'). $request->input('tell-second'). $request->input('tell-third');
+        $contact['tell'] = $request->input('tell-first') . $request->input('tell-second') . $request->input('tell-third');
 
         // データベースに新しいcontactを保存
         Contact::create($contact);
@@ -85,5 +91,4 @@ class ContactController extends Controller
         // thanksルートにリダイレクトして、完了メッセージを表示
         return redirect()->route('thanks');
     }
-
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +24,7 @@
             </tr>
             <tr class="table-row">
                 <th class="table-label">性別</th>
-                <td class="table-data">{{ $contact['gender']  }}</td>
+                <td class="table-data">{{ $contact['gender_label'] }}</td>
             </tr>
             <tr class="table-row">
                 <th class="table-label">メールアドレス</th>
@@ -31,15 +32,15 @@
             </tr>
             <tr class="table-row">
                 <th class="table-label">電話番号</th>
-                <td class="table-data">{{ $contact['tell']  }}</td>
+                <td class="table-data">{{ $contact['tell'] }}</td>
             </tr>
             <tr class="table-row">
                 <th class="table-label">住所</th>
-                <td class="table-data">{{ $contact['address']  }}</td>
+                <td class="table-data">{{ $contact['address'] }}</td>
             </tr>
             <tr class="table-row">
                 <th class="table-label">建物名</th>
-                <td class="table-data">{{ $contact['building']  }}</td>
+                <td class="table-data">{{ $contact['building'] }}</td>
             </tr>
             <tr class="table-row">
                 <th class="table-label">お問い合わせの種類</th>
@@ -47,12 +48,12 @@
             </tr>
             <tr class="table-row">
                 <th class="table-label">お問い合わせ内容</th>
-                <td class="table-data">{{ $contact['detail']  }}</td>
+                <td class="table-data">{{ $contact['detail'] }}</td>
             </tr>
         </table>
         <div class="button-container">
             <form class="content-form-submit" action="{{ route('contact.store') }}" method="POST">
-            @csrf
+                @csrf
                 <input type="hidden" name="first_name" value="{{ $contact['first_name'] }}">
                 <input type="hidden" name="last_name" value="{{ $contact['last_name'] }}">
                 <input type="hidden" name="gender" value="{{ $contact['gender'] }}">
@@ -71,7 +72,7 @@
                 <a class="content-link-contact" href="{{ url()->previous() }}">修正</a>
             </div>
         </div>
-        
+
     </main>
 </body>
 

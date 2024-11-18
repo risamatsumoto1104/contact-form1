@@ -9,7 +9,8 @@ use App\Models\User;
 class RegisterController extends Controller
 {
     // 登録ページの表示
-    public function index(){
+    public function index()
+    {
         return view('register');
     }
 
@@ -29,5 +30,4 @@ class RegisterController extends Controller
         // リダイレクトして「ログイン」ページに移動
         return redirect('/login');
     }
-    
 }

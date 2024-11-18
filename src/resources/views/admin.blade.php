@@ -16,7 +16,10 @@
         <h1 class="header-title">FashionablyLate</h1>
         {{-- ログインページへ遷移 --}}
         <div class="header-link-container">
-            <a class="header-link" href="{{ url('/login') }}">logout</a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="header-link" type="submit">logout</button>
+            </form>
         </div>
     </header>
 
@@ -27,17 +30,22 @@
             {{-- 1行目 --}}
             <div class="content-form-container-search">
                 <div class="form-container-search-group">
-                    <input class="form-input-text" type="text" name="user" placeholder="名前やメールアドレスを入力してください">
+                    <input class="form-input-text" type="text" name="user" placeholder="名前やメールアドレスを入力してください"
+                        value="{{ old('user', request()->input('user')) }}">
                 </div>
 
                 <div class="form-container-search-group-select">
                     <select class="form-select-gender" name="gender">
                         {{-- デフォルトで表示 --}}
                         <option value="" disabled selected>性別</option>
-                        <option value="全て">全て</option>
-                        <option value="男性">男性</option>
-                        <option value="女性">女性</option>
-                        <option value="その他">その他</option>
+                        <option value="全て"
+                            {{ old('gender', request()->input('gender')) == 'All' ? 'selected' : '' }}>全て</option>
+                        <option value="男性" {{ old('gender', request()->input('gender')) == '1' ? 'selected' : '' }}>
+                            男性</option>
+                        <option value="女性" {{ old('gender', request()->input('gender')) == '2' ? 'selected' : '' }}>
+                            女性</option>
+                        <option value="その他" {{ old('gender', request()->input('gender')) == '3' ? 'selected' : '' }}>
+                            その他</option>
                     </select>
                 </div>
 
@@ -47,13 +55,16 @@
                         <option value="" disabled selected>選択してください</option>
                         {{-- categoriesテーブルより表示 --}}
                         @foreach ($categories as $category)
-                            <option value="{{ $category['id'] }}">{{ $category['content'] }}</option>
+                            <option value="{{ $category->id }}"
+                                {{ old('category_id', request()->input('category_id')) == $category->id ? 'selected' : '' }}>
+                                {{ $category['content'] }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-container-search-group-calendar">
-                    <input class="form-input-calendar" type="date" name="calendar">
+                    <input class="form-input-calendar" type="date" name="calendar"
+                        value="{{ old('calendar', request()->input('calendar')) }}">
                 </div>
 
                 <div class="form-container-search-group">
@@ -78,6 +89,11 @@
                     <input type="hidden" name="category_id" value="{{ request('category_id') }}">
                     <input type="hidden" name="calendar" value="{{ request('calendar') }}">
                     <button class="form-button-export" type="submit">エクスポート</button>
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </form>
             </div>
 
@@ -86,9 +102,9 @@
                 <div class="pagination">
                     {{-- 前のページへのリンク --}}
                     @if ($contacts->onFirstPage())
-                        <span class="pagination-icon disabled">&lt;&lt;</span>
+                        <span class="pagination-icon disabled">&lt;</span>
                     @else
-                        <a class="pagination-icon" href="{{ $contacts->previousPageUrl() }}">&lt;&lt;</a>
+                        <a class="pagination-icon" href="{{ $contacts->previousPageUrl() }}">&lt;</a>
                     @endif
 
                     {{-- ページ番号リンク --}}
@@ -102,9 +118,9 @@
 
                     {{-- 次のページへのリンク --}}
                     @if ($contacts->hasMorePages())
-                        <a class="pagination-icon" href="{{ $contacts->nextPageUrl() }}">></a>
+                        <a class="pagination-icon" href="{{ $contacts->nextPageUrl() }}">&gt;</a>
                     @else
-                        <span class="pagination-icon disabled">></span>
+                        <span class="pagination-icon disabled">&gt;</span>
                     @endif
                 </div>
             @endif
@@ -121,7 +137,7 @@
             @foreach ($contacts as $contact)
                 <tr class="table-row-data">
                     <td class="table-data">{{ $contact->last_name . ' ' . $contact->first_name }}</td>
-                    <td class="table-data">{{ $contact->gender }}</td>
+                    <td class="table-data">{{ $contact->gender_label }}</td>
                     <td class="table-data">{{ $contact->email }}</td>
                     <td class="table-data">{{ $contact->category->content }}</td>
                     <td class="table-detail-button">
@@ -196,9 +212,17 @@
                 // レスポンスをJSON形式で解析
                 .then(response => response.json())
                 .then(data => {
+                    // 性別のラベルを定義
+                    const genderLabels = {
+                        1: '男性',
+                        2: '女性',
+                        3: 'その他'
+                    };
+
                     // モーダルの各要素にデータを設定
                     document.getElementById('modal-name').innerText = data.last_name + ' ' + data.first_name;
-                    document.getElementById('modal-gender').innerText = data.gender;
+                    document.getElementById('modal-gender').innerText = genderLabels[data.gender] ||
+                        '不明'; // genderを数値からラベルに変換して表示
                     document.getElementById('modal-email').innerText = data.email;
                     document.getElementById('modal-tell').innerText = data.tell;
                     document.getElementById('modal-address').innerText = data.address;

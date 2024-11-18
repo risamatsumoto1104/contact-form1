@@ -10,7 +10,8 @@ use App\Models\User;
 class LoginController extends Controller
 {
     // ログインページの表示
-    public function index(){
+    public function index()
+    {
         return view('login');
     }
 
@@ -21,13 +22,13 @@ class LoginController extends Controller
         $validated = $request->validated();
 
         // ユーザーが入力したメールアドレスとパスワードで認証を試みる
-        if(Auth::attempt([
+        if (Auth::attempt([
             'email' => $validated['email'],
             'password' => $validated['password']
-        ])){
+        ])) {
             // 成功　セッションを再生成して、セキュリティを向上
             $request->session()->regenerate();
-        }else{
+        } else {
             // 失敗　ログインページに戻る
             return back()->withErrors([
                 'email' => 'メールアドレスが違うか、登録されていません。',
@@ -38,5 +39,21 @@ class LoginController extends Controller
 
         // リダイレクトして「管理画面」ページに移動
         return redirect('/admin');
+    }
+
+    // ログアウト処理
+    public function destroy(Request $request)
+    {
+        // ユーザーをログアウト
+        Auth::logout();
+
+        // セッションを無効化
+        $request->session()->invalidate();
+
+        // セッションの再生成（セキュリティ強化のため）
+        $request->session()->regenerateToken();
+
+        // ログインページにリダイレクト
+        return redirect('/login');
     }
 }
